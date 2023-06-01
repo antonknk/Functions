@@ -2,7 +2,9 @@
 title: "Readme"
 author: "Anton Könneke"
 date: "2023-06-01"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 This repository stores some helper functions that I use.
