@@ -8,7 +8,12 @@ This repository stores some helper functions that I use.
 # Save ggplot as tikz
 
 This is handy for exporting ggplots to LaTeX with the `ggsave` framework
-and `last_plot`.
+and `last_plot`. The function builds on the approach outlined by [Ilyass
+Tabiai](https://github.com/ilyasst) in this [blog
+post](http://iltabiai.github.io/tips/latex/2015/09/15/latex-tikzdevice-r.html).
+The main part is done by the package
+[tikzDevice](https://github.com/daqana/tikzDevice) by Charlie Sharpsteen
+et al.
 
 ``` r
 library(ggplot2)
@@ -35,4 +40,15 @@ ggtiksave("myplot.tex")
 And this is the result if `myplot.tex` is `input` into a tex doc (with
 tikz loaded!).
 
-![The exported plot in a .tex document](latex_screenshot.png)
+![Latin Modern](latex_screenshot.png)
+
+The neat thing is that now, whenever the font of the file is changed, so
+is the font in the plot:
+
+## Palatino Font
+
+![Palatino font](font1.png)
+
+## Linux Libertine Font
+
+![Libertine font](font2.png)
