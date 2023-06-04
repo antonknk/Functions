@@ -52,3 +52,31 @@ is the font in the plot:
 ## Linux Libertine Font
 
 ![Libertine font](font2.png)
+
+# Encode Excel columns
+
+Quite frequently when working with human generated excel files, spaces
+are accidentially stored in numeric cells. In addition to that, it is
+common to use `,`instead of `.` as decimal markers in germany. As
+neither `readxl::read_xlsx` nor `openxlsx::read.xlsx` seem able to
+account for this, this little function does the correction afterwards.
+By wrapping it in `mutate(across())` call, the job can be easily done.
+
+``` r
+source("fix_excel_numcols.R")
+require(dplyr)
+df <- tibble(
+  A = c("1,3", "1,5 ", "2"),
+  B = c("1,1", "5,5 ", " 2,4")
+)
+
+df %>% 
+  mutate(across(everything(), ~fix_excel_numcols(.x)))
+```
+
+    ## # A tibble: 3 × 2
+    ##       A     B
+    ##   <dbl> <dbl>
+    ## 1   1.3   1.1
+    ## 2   1.5   5.5
+    ## 3   2     2.4
